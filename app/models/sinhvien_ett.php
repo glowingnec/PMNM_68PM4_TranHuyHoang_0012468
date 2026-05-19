@@ -1,5 +1,5 @@
 <?php
-class Sinhvien_ett{
+class sinhvien_ett{
     public $hoten;
     public $mssv;
     public $gioitinh;

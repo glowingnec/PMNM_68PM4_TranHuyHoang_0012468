@@ -1,5 +1,5 @@
 <?php
-class ConnectDB{
+class connectDB{
     public static function Connect(){
         $server="localhost";
         $user="root";

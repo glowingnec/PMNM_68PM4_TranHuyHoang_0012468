@@ -1,7 +1,7 @@
 <?php
-class App
+class app
 {
-    protected $controller = 'homeController';
+    protected $controller = 'home';
     protected $action = 'index';
     protected $params = [];
 
@@ -10,7 +10,7 @@ class App
         // if (isset($_GET['url'])) {
         //     echo($_GET['url']);
         // }
-        $urlProcessed = $this->UrlProcess();  //mảng url đã được xử lý
+        $urlProcessed = $this->UrlProcess();  
         //var_dump($urlProcessed);
         if (isset($urlProcessed[0])) {
             if (file_exists('../app/controllers/' . $urlProcessed[0] . '.php')) {
