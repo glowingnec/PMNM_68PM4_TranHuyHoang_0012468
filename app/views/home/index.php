@@ -6,7 +6,8 @@
     <title>Trang chủ</title>
 </head>
 <body>
-    <h1>Chào mừng bạn đến trang quản lý sinh viên</h1> 
-    <a href="/auth/logout">Đăng xuất</a>
+    <h1>Chào mừng bạn đến trang quản lý sinh viên</h1>     
+    <a href="/sinhvien/index">Danh sách sinh viên</a> <br>
+    <a href="/auth/logout">Đăng xuất</a> 
 </body>
 </html>
