@@ -8,6 +8,7 @@
 <body>
     <h1>Chào mừng bạn đến trang quản lý sinh viên</h1>     
     <a href="/sinhvien/index">Danh sách sinh viên</a> <br>
-    <a href="/auth/logout">Đăng xuất</a> 
+    <a href="/auth/logout">Đăng xuất</a> <br>
+    <a href="/sinhvien/create">Thêm sinh viên</a>
 </body>
 </html>
