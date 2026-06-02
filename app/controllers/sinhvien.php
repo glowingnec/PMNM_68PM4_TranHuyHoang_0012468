@@ -4,7 +4,7 @@ class sinhvien extends controller {
 	public function index() {
 		$sinhvienModel = $this->model('sinhvienModel');
 		$sinhviens = $sinhvienModel->getAllSinhVien();
-		$this->view('sinhvien/index', ['sinhviens' => $sinhviens]);
+        $this->view('layout/masterlayout', ['viewname' => 'sinhvien/index', 'sinhviens' => $sinhviens]);
 	}
 	public function create() {
 		$this->view('sinhvien/create');

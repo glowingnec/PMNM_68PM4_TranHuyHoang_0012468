@@ -19,7 +19,12 @@ class sinhvienModel {
         $stmt->bindParam(':id', $id, PDO::PARAM_INT);
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
-}
+    }
+    public function create($hoten, $gioitinh, $mssv) {
+        $query= "INSERT INTO tbl_sinhvien (hoten, gioitinh, mssv) VALUES (".$hoten.",".$gioitinh.",".$mssv.")";
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+    }
 }
 ?>
 
