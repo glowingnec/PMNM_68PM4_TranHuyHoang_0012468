@@ -25,7 +25,24 @@ class sinhvienModel {
         $stmt = $this->conn->prepare($query);
         return $stmt->execute([$hoten, $gioitinh, $mssv]);
     }
+
+    public function paging($limit = 5, $offset = 0, $search = "") {
+    $sql = "SELECT * FROM tbl_sinhvien LIMIT :limit OFFSET :offset";
+    $stmt = $this->conn->prepare($sql);
+    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+    $stmt->execute();
+
+    $sinhvien = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    $countStmt = $this->conn->prepare("SELECT COUNT(*) FROM tbl_sinhvien");
+    $countStmt->execute();
+    $totalRecords = (int)$countStmt->fetchColumn();
+
+    $totalPage = (int)ceil($totalRecords / $limit);
+
+    return [ 'sinhvien' => $sinhvien,  'totalPage' => $totalPage];
 }
-?>
+}
 
     

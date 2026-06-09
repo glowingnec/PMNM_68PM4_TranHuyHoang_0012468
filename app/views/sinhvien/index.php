@@ -2,6 +2,7 @@
 <html lang="en">
     
 <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Danh sách sinh viên</title>
@@ -28,10 +29,16 @@ th {
   background-color: #04AA6D;
   color: white;
 }
+
+.btn {
+    margin-bottom: 10px;
+}
 </style>
 </head>
 <body>
     <h1>Danh sách sinh viên</h1>
+    <a href="/home/index" class="btn btn-secondary">Trang chủ</a>
+    <a href="/sinhvien/create" class="btn btn-primary">Thêm sinh viên</a>
 <table border="1">
     <thead>
         <tr>
@@ -42,7 +49,7 @@ th {
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($sinhviens as $sv): ?>
+        <?php foreach ($sinhvien as $sv): ?>
             <tr>
                 <td><?= $sv['id'] ?></td>
                 <td><?= $sv['hoten'] ?></td>
@@ -53,5 +60,16 @@ th {
 
     </tbody>
 </table>
+<nav style="padding-top: 30px;">
+    <ul class="pagination justify-content-center">
+        <?php for ($i = 1; $i <= $totalPage; $i++): ?>
+            <li class="page-item <?= $i == ceil(($offset + 1) / $limit) ? 'active' : '' ?>">
+                <a class="page-link" href="/sinhvien/index/<?= $limit ?>/<?= ($i - 1) * $limit ?>">
+                    <?= $i ?>
+                </a>
+            </li>
+        <?php endfor; ?>
+    </ul>
+</nav>
 </body>
 </html>
