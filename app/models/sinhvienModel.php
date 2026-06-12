@@ -30,6 +30,11 @@ class sinhvienModel {
         $stmt = $this->conn->prepare($query);
         return $stmt->execute([$hoten, $gioitinh, $mssv, $id]);
     }
+    public function delete($id) {
+        $query = "DELETE FROM tbl_sinhvien WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$id]);
+   }
 
     public function paging($limit = 5, $offset = 0, $search = "") {
     $sql = "SELECT * FROM tbl_sinhvien LIMIT :limit OFFSET :offset";

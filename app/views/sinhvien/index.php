@@ -57,7 +57,9 @@ th {
                 <td><?= $sv['gioitinh'] ?></td>
                 <td><?= $sv['mssv'] ?></td>
                 <td>
-                    <a href="/sinhvien/edit/<?= $sv['id'] ?>" class="btn btn-warning btn-sm">Sửa</a>                </td>
+                    <a href="/sinhvien/edit/<?= $sv['id'] ?>" class="btn btn-warning btn-sm">Sửa</a>
+                    <a href="/sinhvien/delete/<?= $sv['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tin chuẩn chưa anh?')">Xoá</a>
+                </td>
             </tr>
         <?php endforeach; ?>
 
