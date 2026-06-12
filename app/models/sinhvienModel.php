@@ -20,10 +20,15 @@ class sinhvienModel {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function create($hoten, $gioitinh, $mssv) {
+    public function create($id,$hoten, $gioitinh, $mssv) {
         $query= "INSERT INTO tbl_sinhvien (hoten, gioitinh, mssv) VALUES (?, ?, ?)";
         $stmt = $this->conn->prepare($query);
         return $stmt->execute([$hoten, $gioitinh, $mssv]);
+    }
+    public function update($id, $hoten, $gioitinh, $mssv) {
+        $query = "UPDATE tbl_sinhvien SET hoten = ?, gioitinh = ?, mssv = ? WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        return $stmt->execute([$hoten, $gioitinh, $mssv, $id]);
     }
 
     public function paging($limit = 5, $offset = 0, $search = "") {

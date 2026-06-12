@@ -46,6 +46,7 @@ th {
             <th>Họ tên</th>
             <th>Giới tính</th>
             <th>MSSV</th>
+            <th>Hành động</th>
         </tr>
     </thead>
     <tbody>
@@ -55,6 +56,8 @@ th {
                 <td><?= $sv['hoten'] ?></td>
                 <td><?= $sv['gioitinh'] ?></td>
                 <td><?= $sv['mssv'] ?></td>
+                <td>
+                    <a href="/sinhvien/edit/<?= $sv['id'] ?>" class="btn btn-warning btn-sm">Sửa</a>                </td>
             </tr>
         <?php endforeach; ?>
 
