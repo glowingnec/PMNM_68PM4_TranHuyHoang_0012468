@@ -8,7 +8,7 @@ class sinhvienModel {
         $this->conn = $db->connect();
     }
     public function getAllSinhVien() {
-        $sql_query = "SELECT * FROM tbl_sinhvien";
+        $sql_query = "SELECT sv.*, lh.tenlop FROM tbl_sinhvien sv LEFT JOIN tbl_lophoc lh ON sv.malop = lh.malop";
         $stmt = $this->conn->prepare($sql_query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -20,15 +20,15 @@ class sinhvienModel {
         $stmt->execute();
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
-    public function create($id,$hoten, $gioitinh, $mssv) {
-        $query= "INSERT INTO tbl_sinhvien (hoten, gioitinh, mssv) VALUES (?, ?, ?)";
+    public function create($hoten, $gioitinh, $mssv, $malop) {
+        $query= "INSERT INTO tbl_sinhvien (hoten, gioitinh, mssv, malop) VALUES (?, ?, ?, ?)";
         $stmt = $this->conn->prepare($query);
-        return $stmt->execute([$hoten, $gioitinh, $mssv]);
+        return $stmt->execute([$hoten, $gioitinh, $mssv, $malop]);
     }
-    public function update($id, $hoten, $gioitinh, $mssv) {
-        $query = "UPDATE tbl_sinhvien SET hoten = ?, gioitinh = ?, mssv = ? WHERE id = ?";
+    public function update($id, $hoten, $gioitinh, $mssv, $malop) {
+        $query = "UPDATE tbl_sinhvien SET hoten = ?, gioitinh = ?, mssv = ?, malop = ? WHERE id = ?";
         $stmt = $this->conn->prepare($query);
-        return $stmt->execute([$hoten, $gioitinh, $mssv, $id]);
+        return $stmt->execute([$hoten, $gioitinh, $mssv, $malop, $id]);
     }
     public function delete($id) {
         $query = "DELETE FROM tbl_sinhvien WHERE id = ?";
@@ -37,7 +37,7 @@ class sinhvienModel {
    }
 
     public function paging($limit = 5, $offset = 0, $search = "") {
-    $sql = "SELECT * FROM tbl_sinhvien LIMIT :limit OFFSET :offset";
+    $sql = "SELECT sv.*, lh.tenlop FROM tbl_sinhvien sv LEFT JOIN tbl_lophoc lh ON sv.malop = lh.malop LIMIT :limit OFFSET :offset";
     $stmt = $this->conn->prepare($sql);
     $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
     $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);

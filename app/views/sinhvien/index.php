@@ -46,6 +46,7 @@ th {
             <th>Họ tên</th>
             <th>Giới tính</th>
             <th>MSSV</th>
+            <th>Tên lớp</th>
             <th>Hành động</th>
         </tr>
     </thead>
@@ -56,6 +57,7 @@ th {
                 <td><?= $sv['hoten'] ?></td>
                 <td><?= $sv['gioitinh'] ?></td>
                 <td><?= $sv['mssv'] ?></td>
+                <td><?= htmlspecialchars($sv['tenlop'] ?? 'Chưa phân lớp') ?></td>
                 <td>
                     <a href="/sinhvien/edit/<?= $sv['id'] ?>" class="btn btn-warning btn-sm">Sửa</a>
                     <a href="/sinhvien/delete/<?= $sv['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tin chuẩn chưa anh?')">Xoá</a>

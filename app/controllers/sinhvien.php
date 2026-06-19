@@ -11,17 +11,20 @@ class sinhvien extends controller {
         'offset' => $offset]);
 	}
 	public function create() {
-		$this->view('sinhvien/create');
- 		}
+		$lopModel = $this->model('lophocModel');
+		$lops = $lopModel->getAllLop();
+		$this->view('sinhvien/create', ['lops' => $lops]);
+	}
 	 public function store(){
         if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
             $hoten = $_POST['hoten'] ?? '';
             $mssv = $_POST['mssv'] ?? '';
             $gioitinh = $_POST['gioitinh'] ?? '';
+            $malop = $_POST['malop'] ?? '';
             
             $sinhvienModel = $this->model('sinhvienModel');
             
-            $result = $sinhvienModel->create($hoten, $gioitinh, $mssv);
+            $result = $sinhvienModel->create($hoten, $gioitinh, $mssv, $malop);
             
             if($result){
                 header('Location: /sinhvien/index');
@@ -34,7 +37,9 @@ class sinhvien extends controller {
     public function edit($id) {
         $sinhvienModel = $this->model('sinhvienModel');
         $sinhvien = $sinhvienModel->getSinhVienById($id);
-        $this->view('sinhvien/edit', ['sinhvien' => $sinhvien]);
+        $lopModel = $this->model('lophocModel');
+        $lops = $lopModel->getAllLop();
+        $this->view('sinhvien/edit', ['sinhvien' => $sinhvien, 'lops' => $lops]);
     }
     
     public function update() {
@@ -43,9 +48,10 @@ class sinhvien extends controller {
             $hoten = $_POST['hoten'] ?? '';
             $mssv = $_POST['mssv'] ?? '';
             $gioitinh = $_POST['gioitinh'] ?? '';
+            $malop = $_POST['malop'] ?? '';
 
             $sinhvienModel = $this->model('sinhvienModel');
-            $result = $sinhvienModel->update($id, $hoten, $gioitinh, $mssv);
+            $result = $sinhvienModel->update($id, $hoten, $gioitinh, $mssv, $malop);
             
             if($result){
                 header('Location: /sinhvien/index');

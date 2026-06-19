@@ -14,6 +14,17 @@
         <input type="text" id="gioitinh" name="gioitinh"><br>
         <label for="mssv">MSSV:</label>
         <input type="text" id="mssv" name="mssv"><br>
+        <label for="malop">Lớp học:</label>
+        <select id="malop" name="malop">
+            <option value="">-- Chọn lớp học --</option>
+            <?php if (!empty($lops)): ?>
+                <?php foreach ($lops as $lop): ?>
+                    <option value="<?= htmlspecialchars($lop['malop']) ?>">
+                        <?= htmlspecialchars($lop['tenlop']) ?> (<?= htmlspecialchars($lop['malop']) ?>)
+                    </option>
+                <?php endforeach; ?>
+            <?php endif; ?>
+        </select><br>
         <input type="submit" value="Thêm sinh viên">    
     </form>
 
