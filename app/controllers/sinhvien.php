@@ -13,7 +13,10 @@ class sinhvien extends controller {
 	public function create() {
 		$lopModel = $this->model('lophocModel');
 		$lops = $lopModel->getAllLop();
-		$this->view('sinhvien/create', ['lops' => $lops]);
+		$this->view('layout/masterlayout', [
+			'viewname' => 'sinhvien/create',
+			'lops' => $lops
+		]);
 	}
 	 public function store(){
         if(isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST'){
@@ -39,7 +42,11 @@ class sinhvien extends controller {
         $sinhvien = $sinhvienModel->getSinhVienById($id);
         $lopModel = $this->model('lophocModel');
         $lops = $lopModel->getAllLop();
-        $this->view('sinhvien/edit', ['sinhvien' => $sinhvien, 'lops' => $lops]);
+        $this->view('layout/masterlayout', [
+            'viewname' => 'sinhvien/edit',
+            'sinhvien' => $sinhvien,
+            'lops' => $lops
+        ]);
     }
     
     public function update() {

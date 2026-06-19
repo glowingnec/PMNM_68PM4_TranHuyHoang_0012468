@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <meta charset="UTF-8">
@@ -57,7 +56,7 @@ th {
                 <td><?= $sv['hoten'] ?></td>
                 <td><?= $sv['gioitinh'] ?></td>
                 <td><?= $sv['mssv'] ?></td>
-                <td><?= htmlspecialchars($sv['tenlop'] ?? 'Chưa phân lớp') ?></td>
+                <td><?= $sv['tenlop'] ?? 'Chưa phân lớp' ?></td>
                 <td>
                     <a href="/sinhvien/edit/<?= $sv['id'] ?>" class="btn btn-warning btn-sm">Sửa</a>
                     <a href="/sinhvien/delete/<?= $sv['id'] ?>" class="btn btn-danger btn-sm" onclick="return confirm('Tin chuẩn chưa anh?')">Xoá</a>
