@@ -36,13 +36,13 @@ class sinhvienModel {
         return $stmt->execute([$id]);
    }
 
-    public function paging($limit = 5, $offset = 0, $search = "") {
+    public function paging($limit = 5, $offset = 0, $search = "", $sortBy = "id", $sortOrder = "ASC") {
         $searchQuery = "";
         if (!empty($search)) {
             $searchQuery = " WHERE sv.mssv LIKE :search OR sv.hoten LIKE :search OR lh.tenlop LIKE :search";
         }
 
-        $sql = "SELECT sv.*, lh.tenlop FROM tbl_sinhvien sv LEFT JOIN tbl_lophoc lh ON sv.malop = lh.malop" . $searchQuery . " LIMIT :limit OFFSET :offset";
+        $sql = "SELECT sv.*, lh.tenlop FROM tbl_sinhvien sv LEFT JOIN tbl_lophoc lh ON sv.malop = lh.malop" . $searchQuery . " ORDER BY $sortBy $sortOrder LIMIT :limit OFFSET :offset";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
         $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);

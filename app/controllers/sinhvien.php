@@ -6,8 +6,12 @@ class sinhvien extends controller {
             $search = $_GET['search'];
         }
         $search = urldecode($search);
+
+        $sortBy = $_GET['sort_by'] ?? 'id';
+        $sortOrder = $_GET['sort_order'] ?? 'ASC';
+
 		$sinhvienModel = $this->model('sinhvienModel');
-        $result = $sinhvienModel->paging($limit, $offset, $search);
+        $result = $sinhvienModel->paging($limit, $offset, $search, $sortBy, $sortOrder);
         $sinhvien = $result['sinhvien'];
         $totalPage = $result['totalPage'];
         $this->view('layout/masterlayout', [
@@ -16,7 +20,9 @@ class sinhvien extends controller {
             'totalPage' => $totalPage,
             'limit' => $limit,
             'offset' => $offset,
-            'search' => $search
+            'search' => $search,
+            'sortBy' => $sortBy,
+            'sortOrder' => $sortOrder
         ]);
 	}
 	public function create() {
