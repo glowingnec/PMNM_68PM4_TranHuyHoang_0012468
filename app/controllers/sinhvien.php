@@ -2,13 +2,22 @@
 require_once '../app/core/controller.php';
 class sinhvien extends controller {
 	public function index($limit = 5, $offset = 0, $search = "") {
+        if (isset($_GET['search'])) {
+            $search = $_GET['search'];
+        }
+        $search = urldecode($search);
 		$sinhvienModel = $this->model('sinhvienModel');
-        $result = $sinhvienModel->paging($limit, $offset,$search);
+        $result = $sinhvienModel->paging($limit, $offset, $search);
         $sinhvien = $result['sinhvien'];
         $totalPage = $result['totalPage'];
-        // $sinhviens = $sinhvienModel->paging($limit, $offset, $search);
-        $this->view('layout/masterlayout', ['viewname' => 'sinhvien/index', 'sinhvien' => $sinhvien, 'totalPage' => $totalPage, 'limit' => $limit,
-        'offset' => $offset]);
+        $this->view('layout/masterlayout', [
+            'viewname' => 'sinhvien/index',
+            'sinhvien' => $sinhvien,
+            'totalPage' => $totalPage,
+            'limit' => $limit,
+            'offset' => $offset,
+            'search' => $search
+        ]);
 	}
 	public function create() {
 		$lopModel = $this->model('lophocModel');

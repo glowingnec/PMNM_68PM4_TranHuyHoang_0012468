@@ -36,8 +36,19 @@ th {
 </head>
 <body>
     <h1>Danh sách sinh viên</h1>
-    <a href="/home/index" class="btn btn-secondary">Trang chủ</a>
-    <a href="/sinhvien/create" class="btn btn-primary">Thêm sinh viên</a>
+    <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap">
+        <div>
+            <a href="/home/index" class="btn btn-secondary">Trang chủ</a>
+            <a href="/sinhvien/create" class="btn btn-primary">Thêm sinh viên</a>
+        </div>
+        <form id="searchForm" class="d-flex gap-2 align-items-center m-0">
+            <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm MSSV, họ tên, lớp..." value="<?= htmlspecialchars($search ?? '') ?>" style="max-width: 280px;">
+            <button type="submit" class="btn btn-success mb-0" style="white-space: nowrap;">Tìm kiếm</button>
+            <?php if (!empty($search)): ?>
+                <a href="/sinhvien/index/<?= $limit ?>/0" class="btn btn-danger mb-0" style="white-space: nowrap;">Xóa tìm kiếm</a>
+            <?php endif; ?>
+        </form>
+    </div>
 <table border="1">
     <thead>
         <tr>
@@ -70,12 +81,24 @@ th {
     <ul class="pagination justify-content-center">
         <?php for ($i = 1; $i <= $totalPage; $i++): ?>
             <li class="page-item <?= $i == ceil(($offset + 1) / $limit) ? 'active' : '' ?>">
-                <a class="page-link" href="/sinhvien/index/<?= $limit ?>/<?= ($i - 1) * $limit ?>">
+                <a class="page-link" href="/sinhvien/index/<?= $limit ?>/<?= ($i - 1) * $limit ?><?= !empty($search) ? '?search=' . urlencode($search) : '' ?>">
                     <?= $i ?>
                 </a>
             </li>
         <?php endfor; ?>
     </ul>
 </nav>
+<script>
+document.getElementById('searchForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const searchVal = encodeURIComponent(document.getElementById('searchInput').value.trim());
+    const limit = <?= $limit ?>;
+    if (searchVal) {
+        window.location.href = `/sinhvien/index/${limit}/0?search=${searchVal}`;
+    } else {
+        window.location.href = `/sinhvien/index/${limit}/0`;
+    }
+});
+</script>
 </body>
 </html>

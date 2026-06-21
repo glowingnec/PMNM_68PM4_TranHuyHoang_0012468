@@ -37,22 +37,34 @@ class sinhvienModel {
    }
 
     public function paging($limit = 5, $offset = 0, $search = "") {
-    $sql = "SELECT sv.*, lh.tenlop FROM tbl_sinhvien sv LEFT JOIN tbl_lophoc lh ON sv.malop = lh.malop LIMIT :limit OFFSET :offset";
-    $stmt = $this->conn->prepare($sql);
-    $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
-    $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
-    $stmt->execute();
+        $searchQuery = "";
+        if (!empty($search)) {
+            $searchQuery = " WHERE sv.mssv LIKE :search OR sv.hoten LIKE :search OR lh.tenlop LIKE :search";
+        }
 
-    $sinhvien = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $sql = "SELECT sv.*, lh.tenlop FROM tbl_sinhvien sv LEFT JOIN tbl_lophoc lh ON sv.malop = lh.malop" . $searchQuery . " LIMIT :limit OFFSET :offset";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindValue(':limit', (int)$limit, PDO::PARAM_INT);
+        $stmt->bindValue(':offset', (int)$offset, PDO::PARAM_INT);
+        if (!empty($search)) {
+            $stmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+        }
+        $stmt->execute();
 
-    $countStmt = $this->conn->prepare("SELECT COUNT(*) FROM tbl_sinhvien");
-    $countStmt->execute();
-    $totalRecords = (int)$countStmt->fetchColumn();
+        $sinhvien = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $totalPage = (int)ceil($totalRecords / $limit);
+        $countSql = "SELECT COUNT(*) FROM tbl_sinhvien sv LEFT JOIN tbl_lophoc lh ON sv.malop = lh.malop" . $searchQuery;
+        $countStmt = $this->conn->prepare($countSql);
+        if (!empty($search)) {
+            $countStmt->bindValue(':search', '%' . $search . '%', PDO::PARAM_STR);
+        }
+        $countStmt->execute();
+        $totalRecords = (int)$countStmt->fetchColumn();
 
-    return [ 'sinhvien' => $sinhvien,  'totalPage' => $totalPage];
-}
+        $totalPage = (int)ceil($totalRecords / $limit);
+
+        return [ 'sinhvien' => $sinhvien,  'totalPage' => $totalPage];
+    }
 }
 
     
