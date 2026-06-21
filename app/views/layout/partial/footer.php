@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<style>
-    .footer {
-        height: 80px;
-        width: 100%;
-        background-color: green;
-        position: fixed;
-        bottom: 0;
-    }
-</style>
-<body>
-    <div class="footer">Đây là footer</div>
-</body>
-</html>
+<footer class="bg-dark text-secondary py-4 mt-auto border-top border-secondary">
+    <div class="container text-center">
+        <p class="mb-1 text-white">Hệ thống quản lý sinh viên - PMNM 2026</p>
+    </div>
+</footer>

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +7,6 @@
     <title>Trang chủ</title>
 </head>
 <body>
-    <h1>Chào mừng bạn đến trang quản lý sinh viên</h1>     
-    <a href="/sinhvien/index">Danh sách sinh viên</a> <br>
-    <a href="/lophoc/index">Danh sách lớp học</a> <br>
-    <a href="/auth/logout">Đăng xuất</a> <br>
+<h1 class="display-5 fw-bold">Chào mừng đến với hệ thống quản lý sinh viên</h1>
 </body>
 </html>
